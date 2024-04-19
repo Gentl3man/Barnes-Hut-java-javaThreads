@@ -394,12 +394,12 @@ class main {
                 planets.add(planet);
             }
             
-            for (Planet planet : planets) {
-                System.out.println("Name: " + planet.getName() + ", " +
-                                   "Position: (" + planet.getX() + ", " + planet.getY() + "), " +
-                                   "Velocity: (" + planet.getVelocityX() + ", " + planet.getVelocityY() + "), " +
-                                   "Mass: " + planet.getMass());
-            }
+            // for (Planet planet : planets) {
+            //     System.out.println("Name: " + planet.getName() + ", " +
+            //                        "Position: (" + planet.getX() + ", " + planet.getY() + "), " +
+            //                        "Velocity: (" + planet.getVelocityX() + ", " + planet.getVelocityY() + "), " +
+            //                        "Mass: " + planet.getMass());
+            // }
             fileReader.close();
         } catch (IOException e) {
             System.err.println("Failed to open file " + args[0]);
@@ -453,7 +453,7 @@ class main {
             end = Instant.now();
 
             duration = Duration.between(start, end);
-            ellapsed = duration.getSeconds() + duration.getNano() / 1_000_000_000.0;
+            ellapsed += duration.getSeconds() + duration.getNano() / 1_000_000_000.0;
 
         }
 
