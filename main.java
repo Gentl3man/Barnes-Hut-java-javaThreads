@@ -375,6 +375,7 @@ class main {
         double R; // radius of the universe
         double x, y, velocityX, velocityY, mass;
         String name;
+        System.out.println("total threads: "+threadNum);
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(args[0]));        
             String[] line = fileReader.readLine().split(" ");
@@ -414,6 +415,7 @@ class main {
             Square universe = new Square(planets, new CoordinatesXY(0, 0), universeSize);
             start = Instant.now();
             List<Thread> threads = new ArrayList<>();
+            List<Thread> threadsNext = new ArrayList<>();
             ///======================================================
             for (int j = 0; j <threadNum; j++){
                 int startIndex = j * partition;
@@ -436,10 +438,10 @@ class main {
                 int startIndex = j * partition;
                 int endIndex = (i==threadNum -1)? planets.size():(j+1)*partition;
                 Thread thread = new GoNextTask(planets, startIndex, endIndex);
-                threads.add(thread);
+                threadsNext.add(thread);
                 thread.start();
             }
-            for(Thread thread: threads){
+            for(Thread thread: threadsNext){
                 try {
                     thread.join();
                 } catch (InterruptedException e) {
