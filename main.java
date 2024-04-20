@@ -46,7 +46,7 @@ class utils{
         return (G * m1 * m2) / (distance * distance);
     }
     public static NetForce netForce(Planet planet, Square node) {
-        if (node == null)
+        if (node == null || planet.hasExploded())
             return new NetForce(0, 0); // node null, no children aka no gravity
         
         double distance = utils.calculateDistance(planet.getXY(), node.centerMass);
@@ -231,6 +231,7 @@ class Square {
         CoordinatesXY swXY = new CoordinatesXY(-size / 4.0 + xy.x, -size / 4.0 + xy.y);
         CoordinatesXY seXY = new CoordinatesXY(size / 4.0 + xy.x, -size / 4.0 + xy.y);
         for (long index : planetIndexes) {
+            if(planets.get((int)index).hasExploded())continue;
             if (planetInSquare(planets.get((int) index).getXY(), nwXY, size / 2.0)) {
                 nwPlanets.add(index);
             } else if (planetInSquare(planets.get((int) index).getXY(), neXY, size / 2.0)) {
